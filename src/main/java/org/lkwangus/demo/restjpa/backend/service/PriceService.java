@@ -1,9 +1,11 @@
-package org.lkwangus.demo.seekers.backend.service;
+package org.lkwangus.demo.restjpa.backend.service;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.lkwangus.demo.seekers.backend.entity.Price;
-import org.lkwangus.demo.seekers.backend.repository.PriceRepository;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.math3.util.MathUtils;
+import org.lkwangus.demo.restjpa.backend.entity.Price;
+import org.lkwangus.demo.restjpa.backend.repository.PriceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class PriceService {
     @NonNull
     PriceRepository priceRepository;
 
+    @NonNull
+    RabbitMQService rabbitMQService;
+
     public List<Price> findAll() {
         return priceRepository.findAll();
     }
@@ -32,10 +37,23 @@ public class PriceService {
     public Price add(Double value) {
         Price price = new Price(null, value, new Date());
         logger.info("[price] price: " + price);
-        return priceRepository.saveAndFlush(price);
+        price = priceRepository.saveAndFlush(price);
+        rabbitMQService.send(price);
+        return price;
     }
 
-    public Page<Price> getLatest() {
+    public Double getLatestAverage() {
+        List<Price> prices = this.getLatestWithPage().getContent();
+        Double sum = prices.stream().mapToDouble(p -> p.getValue()).sum();
+        Double average = sum / prices.size();
+        return average;
+    }
+
+    public List<Price> getLatest() {
+        return this.getLatestWithPage().getContent();
+    }
+
+    public Page<Price> getLatestWithPage() {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "createdAt"));
         return priceRepository.findAll(pageable);
     }

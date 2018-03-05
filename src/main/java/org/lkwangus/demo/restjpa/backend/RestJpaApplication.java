@@ -1,4 +1,4 @@
-package org.lkwangus.demo.seekers.backend;
+package org.lkwangus.demo.restjpa.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 public class RestJpaApplication extends SpringBootServletInitializer {
-
-	public static void main(String[] args) {
-		SpringApplication.run(SeekersBackendApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RestJpaApplication.class, args);
+    }
 }

@@ -1,7 +1,7 @@
-package org.lkwangus.demo.seekers.backend.repository;
+package org.lkwangus.demo.restjpa.backend.repository;
 
-import org.lkwangus.demo.seekers.backend.entity.Price;
+import org.lkwangus.demo.restjpa.backend.entity.Price;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PriceRepository extends JpaRepository<Price, Long>{
+public interface PriceRepository extends JpaRepository<Price, Long> {
 }

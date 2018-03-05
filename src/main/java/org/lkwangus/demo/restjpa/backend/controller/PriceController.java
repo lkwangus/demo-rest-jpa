@@ -1,9 +1,9 @@
-package org.lkwangus.demo.seekers.backend.controller;
+package org.lkwangus.demo.restjpa.backend.controller;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.lkwangus.demo.seekers.backend.entity.Price;
-import org.lkwangus.demo.seekers.backend.service.PriceService;
+import org.lkwangus.demo.restjpa.backend.entity.Price;
+import org.lkwangus.demo.restjpa.backend.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +31,17 @@ public class PriceController {
     }
 
     @RequestMapping("latest")
-    public Page<Price> latest() {
+    public List<Price> latest() {
         return priceService.getLatest();
     }
 
+    @RequestMapping("latestWithPage")
+    public Page<Price> latestWithPage() {
+        return priceService.getLatestWithPage();
+    }
+
+    @RequestMapping("latestAverage")
+    public Double latestAverage() {
+        return priceService.getLatestAverage();
+    }
 }

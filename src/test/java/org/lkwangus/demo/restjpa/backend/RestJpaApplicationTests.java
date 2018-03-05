@@ -1,4 +1,4 @@
-package org.lkwangus.demo.seekers.backend;
+package org.lkwangus.demo.restjpa.backend;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class RestJpaApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
 }

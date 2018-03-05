@@ -1,4 +1,4 @@
-package org.lkwangus.demo.seekers.backend.entity;
+package org.lkwangus.demo.restjpa.backend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
